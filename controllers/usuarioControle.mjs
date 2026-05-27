@@ -1,8 +1,8 @@
 import UsuarioModelo from '../models/usuarioModelo.mjs'
 const usuario = { // Com base na modelagem, vamos utilizar nas nossas rotas
     async index(requisicao, resposta) { // Página inicial de usuario
-        const usuario = await UsuarioModelo.obterTodosOsDados() // Obtem usuario
-        resposta.render('usuario/index', { usuario }) // Renderiza a página com os usuario
+        const usuarios = await UsuarioModelo.obterTodosOsDados() // Obtem usuario
+        resposta.render('usuario/index', { usuarios }) // Renderiza a página com os usuario
     },
     async criar(requisicao, resposta) {
         const { Nome, Email, Telefone } = requisicao.body

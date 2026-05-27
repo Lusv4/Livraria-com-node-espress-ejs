@@ -2,15 +2,19 @@
   <div class="col-12 col-md-8 col-lg-6">
     <div class="card shadow">
       <div class="card-body">
-        <h2 class="card-title mb-4"><%= usuario.titulo %></h2>
+        <h2 class="card-title mb-4">Nome: <%= usuario.Nome %></h2>
         <dl class="row mb-4">
-          <dt class="col-sm-3">Autor:</dt>
-          <dd class="col-sm-9"><%= usuario.autor %></dd>
+          <dt class="col-sm-3">Email:</dt>
+          <dd class="col-sm-9"><%= usuario.Email %></dd>
+        </dl>
+        <dl class="row mb-4">
+          <dt class="col-sm-3">Telefone:</dt>
+          <dd class="col-sm-9"><%= usuario.Telefone %></dd>
         </dl>
       </div>
       <div class="card-footer">
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-between">
-          <a href="/usuario/<%= usuario.uid %>/editar" class="btn btn-warning">Editar</a>
+          <a href="/usuario/<%= usuario.ID %>/editar" class="btn btn-warning">Editar</a>
           <a href="/usuario" class="btn btn-secondary">Voltar</a>
         </div>
       </div>

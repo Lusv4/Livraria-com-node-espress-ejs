@@ -11,24 +11,26 @@ class UsuarioModelo {
                     ID INT IDENTITY(1,1) PRIMARY KEY,
                     Nome NVARCHAR(100) NOT NULL,
                     Email NVARCHAR(100) NOT NULL UNIQUE,
-                    Telefone NVARCHAR(15),
+                    Telefone NVARCHAR(15),                    
                     DataCadastro DATETIME DEFAULT GETDATE()
                 )
             END
         `
         await mssql.query(configuracaoTabela)
     }
+    
     static async obterTodosOsDados() {
         await this.garantirTabelaDoApp()
         const resultado = await mssql.query('SELECT * FROM Usuarios') // Chamando nossos dados
         return resultado.recordset // Retornando os dados para a aplicação
     }
+    
     static async criarUsuario({ Nome, Email, Telefone }) {
         await this.garantirTabelaDoApp() // Garanti que a tabela exista
         const requisicao = new mssql.Request() // Faz uma requisição ao banco de dados
         requisicao.input('Nome', mssql.NVarChar(100), Nome)
         requisicao.input('Email', mssql.NVarChar(100), Email)
-        requisicao.input('Telefone', mssql.NVarChar(15), Telefone)
+        requisicao.input('Telefone', mssql.NVarChar(15), Telefone)       
         const resultado = await requisicao.query(`
             INSERT INTO Usuarios (Nome, Email, Telefone)
             OUTPUT INSERTED.ID
@@ -44,6 +46,7 @@ class UsuarioModelo {
     }
     static async obterPeloID(ID) {
         //await this.garantirTabelaDoApp()
+        await conectar()
         const requisicao = new mssql.Request()
         requisicao.input('ID', mssql.Int, ID)
         const resultado = await requisicao.query('SELECT * FROM Usuarios WHERE ID = @ID')
@@ -51,18 +54,24 @@ class UsuarioModelo {
     }
     static async editar(ID, { Nome, Email, Telefone }) {
         //await this.garantirTabelaDoApp()
+        await conectar()
         const requisicao = new mssql.Request() // Faz uma requisição ao banco de dados
         requisicao.input('ID', mssql.Int, ID)
         requisicao.input('Nome', mssql.NVarChar(100), Nome)
         requisicao.input('Email', mssql.NVarChar(100), Email)
         requisicao.input('Telefone', mssql.NVarChar(15), Telefone)
         await requisicao.query(`
-            UPDATE Usuarios SET Nome = @Nome,Email = @Email,Telefone = @Telefone WHERE ID=@ID
+            UPDATE Usuarios
+                SET Nome = @Nome,
+                Email = @Email,
+                Telefone = @Telefone             
+                WHERE ID=@ID
             `)
         return this.obterPeloID(ID)
     }
     static async remover(ID) {
         //await this.garantirTabelaDoApp()
+        await conectar()
         const requisicao = new mssql.Request()
         requisicao.input('ID', mssql.Int, ID)
         const resultado = await requisicao.query('DELETE FROM Usuarios WHERE ID = @ID')

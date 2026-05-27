@@ -29,6 +29,7 @@ class LivroModelo {
     }
     static async criarLivro({ titulo, genero, autor, editora, ISBN, quantidade, dataPublicacao }) {
         await this.garantirTabelaDoApp() // Garanti que a tabela exista
+        await conectar()
         const requisicao = new mssql.Request() // Faz uma requisição ao banco de dados
         requisicao.input('titulo', mssql.VarChar(mssql.MAX), titulo) // Prepara para a inserção no BD
         requisicao.input('genero', mssql.VarChar(100), genero)
@@ -50,6 +51,7 @@ class LivroModelo {
     }
     static async obterPeloUID(uid) {
         //await this.garantirTabelaDoApp()
+        await conectar()
         const requisicao = new mssql.Request()
         requisicao.input('uid', mssql.UniqueIdentifier, uid)
         const resultado = await requisicao.query('SELECT * FROM Livros WHERE uid = @uid')
@@ -57,6 +59,7 @@ class LivroModelo {
     }
     static async editar(uid, { titulo, genero, autor, editora, ISBN, quantidade, dataPublicacao }) {
         //await this.garantirTabelaDoApp()
+        await conectar()
         const requisicao = new mssql.Request() // Faz uma requisição ao banco de dados
         requisicao.input('uid', mssql.UniqueIdentifier, uid) // Preciso do ID
         requisicao.input('titulo', mssql.VarChar(mssql.MAX), titulo)
@@ -74,6 +77,7 @@ class LivroModelo {
         return this.obterPeloUID(uid)
     }
     static async remover(uid) {
+        await conectar()
         //await this.garantirTabelaDoApp()
         const requisicao = new mssql.Request()
         requisicao.input('uid', mssql.UniqueIdentifier, uid)

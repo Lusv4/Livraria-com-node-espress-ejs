@@ -1,0 +1,58 @@
+<% title="Funcionários" %>
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="mb-4">Gestão de Funcionários</h1>
+        </div>
+    </div>
+ 
+    <% if (funcionarios.length===0) { %>
+        <div class="alert alert-info text-center" role="alert">
+            <p class="mb-3">Nenhum funcionário foi cadastrado.</p>
+            <a href="/funcionarios/novo" class="btn btn-primary">
+                Adicionar o primeiro funcionário
+            </a>
+        </div>
+        <% } else { %>
+            <div class="row g-4">
+                <% funcionarios.forEach(funcionario=> { %>
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="card h-100 shadow-sm">
+ 
+                            <% if (funcionario.imagem) { %>
+                                <img src="/images/<%= funcionario.imagem %>" class="card-img-top"
+                                    alt="Capa de <%= funcionario.nome %>" style="height: 280px; object-fit: cover;">
+                                <% } else { %>
+                                    <div class="d-flex align-items-center justify-content-center bg-secondary text-white"
+                                        style="height: 280px; font-size: 3rem;">
+                                        📚
+                                    </div>
+                                    <% } %>
+ 
+                                        <div class="card-body d-flex flex-column">
+                                            <h5 class="card-title">
+                                                <%= funcionario.nome %>
+                                            </h5>
+                                            <p>
+                                                <%= funcionario.cargo %>
+                                            </p>
+                                            <p>Departamento: <%= funcionario.departamento %>
+                                            </p>
+                                            <div class="mt-auto d-flex gap-2">
+                                                <a href="/funcionarios/<%= funcionario.UID %>"
+                                                    class="btn btn-sm btn-info flex-fill"><i class="bi bi-eye"></i>Ver</a>
+                                                <a href="/funcionarios/<%= funcionario.UID %>/editar"
+                                                    class="btn btn-sm btn-warning flex-fill"><i class="bi bi-pencil-square"></i>Editar</a>
+                                                <form action="/funcionarios/<%= funcionario.UID %>/deletar"
+                                                    method="post" class="flex-fill"
+                                                    onsubmit="return confirm('Confirmar remover o livro?')">
+                                                    <button type="submit"
+                                                        class="btn btn-sm btn-danger w-100"><i class="bi bi-folder-x"></i>Remover</button>
+                                                </form>
+                                            </div>
+                                        </div>
+ 
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+            <% } %>

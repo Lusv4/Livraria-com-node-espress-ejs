@@ -1,0 +1,37 @@
+<% title="usuario" %>
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="mb-4">Catálogo de usuario</h1>
+        </div>
+    </div>
+    <% if (usuario.length===0) { %>
+        <div class="alert alert-info text -center" role="alert">
+            <p class="mb-3">Nenhum livro foi cadastrado.</p>
+            <a href="/usuario/novo" class="btn btn-primary">Adicionar o primeiro livro</a>
+        </div>
+        <% } else { %>
+            <div class="row g-4">
+                <% usuario.forEach(livro=> { %>
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <%= livro.titulo %>
+                                </h5>
+                                <p>
+                                    <%= livro.editora %>
+                                </p>
+                                <p>Quantidade disponivel: <%= livro.quantidade %>
+                                </p>
+                                <a href="/usuario/<%= livro.uid %>" class="btn btn-sm btn-info">Ver</a>
+                                <a href="/usuario/<%= livro.uid %>/editar" class="btn btn-sm btn-warning">Editar</a>
+                                <form action="/usuario/<%= livro.uid %>/deletar" method="post" class="d-inline"
+                                    onsubmit="return confirm('Confirmar remover o livro?')">
+                                    <button type="submit" class="btn btn-sm btn-danger">Remover</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+            <% } %>

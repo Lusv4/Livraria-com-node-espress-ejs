@@ -1,0 +1,37 @@
+<% title="usuarios" %>
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="mb-4">Catálogo de usuarios</h1>
+        </div>
+    </div>
+    <% if (usuario.length===0) { %>
+        <div class="alert alert-info text -center" role="alert">
+            <p class="mb-3">Nenhum usuario foi cadastrado.</p>
+            <a href="/usuario/novo" class="btn btn-primary">Adicionar o primeiro usuario</a>
+        </div>
+        <% } else { %>
+            <div class="row g-4">
+                <% usuarios.forEach(usuario=> { %>
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <%= usuario.titulo %>
+                                </h5>
+                                <p>
+                                    <%= usuario.editora %>
+                                </p>
+                                <p>Quantidade disponivel: <%= usuario.quantidade %>
+                                </p>
+                                <a href="/usuario/<%= usuario.uid %>" class="btn btn-sm btn-info">Ver</a>
+                                <a href="/usuario/<%= usuario.uid %>/editar" class="btn btn-sm btn-warning">Editar</a>
+                                <form action="/usuario/<%= usuario.uid %>/deletar" method="post" class="d-inline"
+                                    onsubmit="return confirm('Confirmar remover o usuario?')">
+                                    <button type="submit" class="btn btn-sm btn-danger">Remover</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+            <% } %>

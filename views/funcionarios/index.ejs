@@ -2,6 +2,7 @@
     <div class="row mb-4">
         <div class="col-12">
             <h1 class="mb-4">Gestão de Funcionários</h1>
+            <a href="/funcionarios/novo" type="button" class="btn btn-dark">Novo Funcionario</a>
         </div>
     </div>
  
@@ -38,11 +39,11 @@
                                             <p>Departamento: <%= funcionario.departamento %>
                                             </p>
                                             <div class="mt-auto d-flex gap-2">
-                                                <a href="/funcionarios/<%= funcionario.UID %>"
+                                                <a href="/funcionarios/<%= funcionario.id %>"
                                                     class="btn btn-sm btn-info flex-fill"><i class="bi bi-eye"></i>Ver</a>
-                                                <a href="/funcionarios/<%= funcionario.UID %>/editar"
+                                                <a href="/funcionarios/<%= funcionario.id %>/editar"
                                                     class="btn btn-sm btn-warning flex-fill"><i class="bi bi-pencil-square"></i>Editar</a>
-                                                <form action="/funcionarios/<%= funcionario.UID %>/deletar"
+                                                <form action="/funcionarios/<%= funcionario.id %>/deletar"
                                                     method="post" class="flex-fill"
                                                     onsubmit="return confirm('Confirmar remover o livro?')">
                                                     <button type="submit"

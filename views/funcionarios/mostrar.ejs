@@ -2,16 +2,20 @@
   <div class="col-12 col-md-8 col-lg-6">
     <div class="card shadow">
       <div class="card-body">
-        <h2 class="card-title mb-4"><%= livro.titulo %></h2>
+         <h2 class="card-title mb-4">Nome: <%= funcionario.nomeCompleto %></h2>
         <dl class="row mb-4">
-          <dt class="col-sm-3">Autor:</dt>
-          <dd class="col-sm-9"><%= livro.autor %></dd>
+          <dt class="col-sm-3">Email:</dt>
+          <dd class="col-sm-9"><%= funcionario.email %></dd>
+        </dl>
+        <dl class="row mb-4">
+          <dt class="col-sm-3">Cargo:</dt>
+          <dd class="col-sm-9"><%= funcionario.cargo %></dd>
         </dl>
       </div>
       <div class="card-footer">
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-between">
-          <a href="/livros/<%= livro.uid %>/editar" class="btn btn-warning">Editar</a>
-          <a href="/livros" class="btn btn-secondary">Voltar</a>
+          <a href="/funcionarios/<%= funcionario.id %>/editar" class="btn btn-warning">Editar</a>
+          <a href="/funcionarios" class="btn btn-secondary">Voltar</a>
         </div>
       </div>
     </div>

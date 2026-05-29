@@ -12,16 +12,39 @@ const funcionarios = {
         await FuncionarioModelo.criarFuncionario({ nomeUsuario, senha, nomeCompleto, cargo, email })
         resposta.redirect('funcionarios')
     },
-    async mostrar(requisicao, resposta) { },
-    async edicaoFormulario(requisicao, resposta) { },
+    async mostrar(requisicao, resposta) {
+        const funcionario = await FuncionarioModelo.obterPeloId(requisicao.params.id)
+
+        if (!funcionario) {
+            return resposta.status(404).send('Funcionário não encontrado')
+        }
+
+        resposta.render('funcionarios/mostrar', { funcionario })
+    },
+
+    async edicaoFormulario(requisicao, resposta) {
+        const funcionario = await FuncionarioModelo.obterPeloId(requisicao.params.id)
+
+        if (!funcionario) {
+            return resposta.status(404).send('Funcionario não encontrado')
+        }
+
+        resposta.render('funcinarios/editar', { funcionario })
+    },
+
     async atualizar(requisicao, resposta) {
         const { nomeUsuario, nomeCompleto, cargo, email } = requisicao.body
-        await FuncionarioModelo.criarLivro(
+
+        await FuncionarioModelo.editar(
             requisicao.params.id,
             { nomeUsuario, nomeCompleto, cargo, email }//dataCadastro
         )
-        resposta.redirect('funcionarios')
+        resposta.redirect('/funcionarios')
     },
-    async remover(requisicao, resposta) { },
+    async remover(requisicao, resposta) {
+        await FuncionarioModelo.remover(requisicao.params.id)
+
+        resposta.redirect('/funcionarios')
+     },
 }
 export default funcionarios

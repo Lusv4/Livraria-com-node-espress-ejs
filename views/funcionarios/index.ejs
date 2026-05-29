@@ -31,12 +31,9 @@
  
                                         <div class="card-body d-flex flex-column">
                                             <h5 class="card-title">
-                                                <%= funcionario.nome %>
+                                                <%= funcionario.nomeUsuario %>
                                             </h5>
-                                            <p>
-                                                <%= funcionario.cargo %>
-                                            </p>
-                                            <p>Departamento: <%= funcionario.departamento %>
+                                            <p>Cargo: <%= funcionario.cargo %>
                                             </p>
                                             <div class="mt-auto d-flex gap-2">
                                                 <a href="/funcionarios/<%= funcionario.id %>"

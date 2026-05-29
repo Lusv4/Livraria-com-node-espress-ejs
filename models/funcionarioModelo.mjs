@@ -19,7 +19,9 @@ class FuncionarioModelo {
     }
     static async obterPeloId(id) {
         await conectar()
-        const resultado = await mssql.query('SELECT * FROM Funcionario WHERE id = @id', { id })
+        const requisicao = new mssql.Request()
+        requisicao.input('id', mssql.Int, id)
+        const resultado = await requisicao.query('SELECT * FROM Funcionario WHERE id = @id')
         return resultado.recordset[0]
     }
     static async editar(id, { nomeUsuario, nomeCompleto, cargo, email }) {

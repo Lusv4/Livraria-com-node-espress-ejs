@@ -3,6 +3,10 @@
     <div class="card shadow">
       <div class="card-body">
          <h2 class="card-title mb-4">Nome: <%= funcionario.nomeCompleto %></h2>
+         <dl class="row mb-4">
+          <dt class="col-sm-3">Nick Usuario:</dt>
+          <dd class="col-sm-9"><%= funcionario.nomeUsuario %></dd>
+        </dl>
         <dl class="row mb-4">
           <dt class="col-sm-3">Email:</dt>
           <dd class="col-sm-9"><%= funcionario.email %></dd>
@@ -14,7 +18,7 @@
       </div>
       <div class="card-footer">
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-between">
-          <a href="/funcionarios/<%= funcionario.id %>/editar" class="btn btn-warning">Editar</a>
+          <a href="/funcionarios/<%= funcionario.ID %>/editar" class="btn btn-warning">Editar</a>
           <a href="/funcionarios" class="btn btn-secondary">Voltar</a>
         </div>
       </div>

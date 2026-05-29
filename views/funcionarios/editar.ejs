@@ -2,7 +2,7 @@
     <div class="col-12 col-md-8 col-lg-6">
         <h2 class="mb-4">Editar livro</h2>
 
-        <form action="/funcionarios/<%= funcionario.id %>" method="post">
+        <form action="/funcionarios/<%= funcionario.ID %>" method="post">
 
             <div class="mb-3">
                 <label for="Nome" class="form-label">Nome de Usuario</label>
@@ -11,15 +11,9 @@
             </div>
 
             <div class="mb-3">
-                <label for="Nome" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="Senha" value="<%= funcionario.Senha %>" name="Senha"
-                    required>
-            </div>
-
-            <div class="mb-3">
                 <label for="Nome" class="form-label">Nome Completo</label>
-                <input type="text" class="form-control" id="nomecompleto" value="<%= funcionario.nomecompleto %>"
-                    name="nomecompleto" required>
+                <input type="text" class="form-control" id="nomeCompleto" value="<%= funcionario.nomeCompleto %>"
+                    name="nomeCompleto" required>
             </div>
 
             <div class="mb-3">

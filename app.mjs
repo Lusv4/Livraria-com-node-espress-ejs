@@ -4,6 +4,7 @@ import livroRotas from './routes/livro.mjs'
 import usuarioRotas from './routes/usuario.mjs'
 import expressLayouts from 'express-ejs-layouts' // Importando o express-ejs-layouts para usar layouts com EJS
 import funcionarioRotas from './routes/funcionario.mjs'
+import pedidoRotas from './routes/pedido.mjs'
 
 const app = express()
 const PORTA = process.env.PORT || 3000
@@ -25,3 +26,4 @@ app.use(express.static('./public'))
 app.use('/livros', livroRotas) // Usa as rotas definidas de livros
 app.use('/usuario', usuarioRotas)
 app.use('/funcionarios', funcionarioRotas)
+app.use('/pedidos', pedidoRotas)

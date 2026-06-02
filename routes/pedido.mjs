@@ -3,6 +3,7 @@ import pedidoControle from '../controllers/pedidoControle.mjs'
 const rota = express.Router()
 rota.get('/', pedidoControle.index)
 rota.post('/:id/deletar', pedidoControle.remover)
-rota.post('/novo', pedidoControle.criar)
+rota.get('/novo', pedidoControle.novoFormulario)
+rota.post('/', pedidoControle.criar)
 
 export default rota

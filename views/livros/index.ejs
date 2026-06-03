@@ -1,14 +1,28 @@
-<% title="usuario" %>
+<% title="Livros" %>
     <div class="row mb-4">
         <div class="col-12">
-            <h1 class="mb-4">Catálogo de livros</h1>
-            <a href="/livros/novo" type="button" class="btn btn-dark">Novo livro</a>
+            <h1 class="mb-4">Catálogo de Livros</h1>
         </div>
     </div>
+    <form method="get" action="/livros" class="mb-4">
+        <div class="input-group">
+            <input type="search" name="q" class="form-control" placeholder="Pesquise"
+                value="<% typeof termo !== 'undefined' && termo ? termo : '' %>">
+            <button class="btn btn-outline-secondary" type="submit">Pesquisar</button>
+            <% if(typeof termo !=='undefined' && termo) { %>
+                <a href="/livros" class="btn btn-outline-secondary">Limpar</a>
+                <% } %>
+        </div>
+    </form>
     <% if (livros.length===0) { %>
         <div class="alert alert-info text -center" role="alert">
-            <p class="mb-3">Nenhum livro foi cadastrado.</p>
-            <a href="/livros/novo" class="btn btn-primary">Adicionar o primeiro livro</a>
+            <% if(typeof termo !=='undefined' && termo) { %>
+                <p class="mb-3">Nenhum livro foi encontrado para a pesquisa de <%= termo%>.</p>
+                <a href="/livros" class="btn btn-outline-secondary">Voltar</a>
+                <% } else { %>
+                    <p class="mb-3">Nenhum livro foi cadastrado.</p>
+                    <a href="/livros/novo" class="btn btn-primary">Adicionar o primeiro livro</a>
+                    <% } %>
         </div>
         <% } else { %>
             <div class="row g-4">
@@ -22,6 +36,7 @@
                                 <p>
                                     <%= livro.editora %>
                                 </p>
+                                <image hre></image>
                                 <p>Quantidade disponivel: <%= livro.quantidade %>
                                 </p>
                                 <a href="/livros/<%= livro.uid %>" class="btn btn-sm btn-info">Ver</a>
@@ -35,4 +50,5 @@
                     </div>
                     <% }) %>
             </div>
+
             <% } %>

@@ -2,8 +2,21 @@
     <div class="col-12 col-md-8 col-lg-6">
         <h2 class="mb-4">Editar livro</h2>
 
-        <form action="/livros/<%= livro.uid %>" method="post">
-
+        <form action="/livros/<%= livro.uid %>" method="post" enctype="multipart/form-data">
+            <% if (livro.imagem) { %>
+                <div class="mb-3 text-center">
+                    <img src="<%= livro.imagem %>" alt="<%= livro.titulo %>" class="img-fluid rounded" style="max-height: 240px; object-fit: cover;">
+                </div>
+                <div class="mb-3">
+                    <label for="imagem" class="form-label">Atualizar imagem</label>
+                    <input type="file" class="form-control" id="imagem" name="imagem" accept="image/*">
+                </div>
+            <% } else { %>
+                <div class="mb-3">
+                    <label for="imagem" class="form-label">Adicionar imagem</label>
+                    <input type="file" class="form-control" id="imagem" name="imagem" accept="image/*">
+                </div>
+            <% } %>
             <div class="mb-3">
                 <label for="titulo" class="form-label">Título</label>
     <input type="text" class="form-control" id="titulo" value="<%= livro.titulo %>" name="titulo" required>
@@ -35,7 +48,8 @@
             </div>
             <div class="mb-3">
                 <label for="dataPublicacao" class="form-label">Data de publicação</label>
-                <input type="date" class="form-control" id="dataPublicacao" name="dataPublicacao" value="<%= livro.dataPublicacao %>" required>
+                <input type="date" class="form-control" id="dataPublicacao" name="dataPublicacao" 
+                value="<%= livro.dataPublicacao.toISOString().split('T')[0]%>" required>
             </div>
 
             <button type="submit" class="btn btn-primary w-100">

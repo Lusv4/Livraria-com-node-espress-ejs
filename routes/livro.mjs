@@ -2,6 +2,7 @@ import express, { Router } from 'express'
 import livroControle from '../controllers/livroControle.mjs'
 import multer from 'multer'
 import path from 'path'
+import { garantirEntradaNaRota } from '../views/middlewares/loginApp.mjs'
 const rota = express.Router()
 
 const armazenamento = multer.diskStorage({
@@ -14,6 +15,7 @@ const armazenamento = multer.diskStorage({
     }
 })
 const upload = multer({ storage: armazenamento })
+rota.use(garantirEntradaNaRota)
 rota.get('/', livroControle.index) // Rota para a pagina inicial de livros
 rota.get('/novo', livroControle.novoFormulario) // Rota para o formulario de preenchimento de um novo livro
 rota.post('/', upload.single('imagem'), livroControle.criar) // Rota para a criação de do novo livro

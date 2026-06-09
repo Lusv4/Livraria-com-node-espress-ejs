@@ -40,5 +40,13 @@ class FuncionarioModelo {
         requisicao.input('id', mssql.Int, id)
         await requisicao.query('DELETE FROM Funcionario WHERE id = @id')
     }
+    static async autenticar(nomeUsuario, senha) {
+        await conectar()
+        const req = new mssql.Request()
+        req.input('nomeUsuario', mssql.NVarChar(127), nomeUsuario)
+        req.input('senha', mssql.NVarChar(255), senha)
+        const resultado = await req.query('EXEC acessar @nomeUsuario, @senha')
+        return resultado.recordset[0] || null
+    }
 }
 export default FuncionarioModelo

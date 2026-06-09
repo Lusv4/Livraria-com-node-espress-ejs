@@ -12,8 +12,8 @@ const logarControle = {
     async processarLogin(req, res) {
         const { nomeUsuario, senha } = req.body
         if (!nomeUsuario || !senha) return res.status(400).render('logar/login', { erro: 'Informe suas credencias' })
-        const funcionario = FuncionarioModelo.autenticar(nomeUsuario, senha)
-        if (!funcionario) return res.status(401).render('logar/login', { erro: 'Credenciais erradas.' })
+        const funcionario = await FuncionarioModelo.autenticar(nomeUsuario, senha)
+        if (funcionario === null) return res.status(401).render('logar/login', { erro: 'Credenciais erradas.' })
         req.session.usuario = {
             id: funcionario.id,
             nome: funcionario.nomeCompleto,
@@ -32,8 +32,7 @@ const logarControle = {
     },
     async login(req, res) {
         if (req.session?.usuario) return res.redirect('/')
-        const sucesso = null
-        return res.render('logar/login', { erro: null, sucesso })
+        return res.render('logar/login', { erro: null, sucesso: null })
     },
 }
 export default logarControle
